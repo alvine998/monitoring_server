@@ -8,6 +8,8 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://www.gstatic.com/firebasejs/live/3.0/firebase.js"></script>
     <script>
         const firebaseConfig = {
@@ -25,70 +27,130 @@
         let toggle = false
     </script>
     <style>
-        boxx {
-            background-color: white;
+        a {
+            text-decoration: none;
         }
 
-        boxx:hover {
+        .guide-icon {
+            color: gray;
+            margin-top: 10px;
+            padding: 5px;
+            transition: all;
+            transition-duration: 0.2s;
+        }
+
+        .guide-icon:hover {
             background-color: gray;
+            padding: 5px;
+            color: white;
+            text-decoration: none;
+            transition: all;
+            transition-duration: 0.2s;
+        }
+
+        .logout {
+            color: red;
+            margin-top: 10px;
+            padding: 5px;
+            transition: all;
+            transition-duration: 0.2s;
+        }
+
+        .logout:hover {
+            background-color: red;
+            padding: 5px;
+            color: white;
+            text-decoration: none;
+            transition: all;
+            transition-duration: 0.2s;
+        }
+
+        .active {
+            background-color: gray;
+            padding: 5px;
+            color: white;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .active:hover {
+            text-decoration: none;
+            color: white;
+        }
+
+        .brand:hover {
+            text-decoration: none;
+            color: white;
         }
     </style>
 </head>
 
-<body style="background: lightgray">
-    <div class="bg-white p-2 w-100">
-        <div class="d-flex align-items-center justify-content-center w-100">
-            <h5><a href="/" class="text-dark">Monitoring Server</a></h5>
-            <div class="d-flex align-items-center ml-5 mt-2">
-                <p id="dashboard"><a href="/dashboard" class="text-dark">Home</a></p>
-                <p id="history" style="text-decoration: underline;" class="ml-2"><a href="/history" class="text-dark">History</a></p>
-                <p id="guide" class="ml-2"><a href="/guide" class="text-dark">Panduan</a></p>
-                <p id="logout" class="ml-2"><a href="/" class="text-danger">Logout</a></p>
+<body>
+    <div style="background: lightgray; height: 100vh;" class="d-flex flex-row">
+        <div style="width: 250px; background-color: #1F3B46; padding-top: 20px;">
+            <div class="d-flex flex-column justify-content-center w-100">
+                <h5><a href="" class="text-white mx-auto pl-4 brand">Monitoring Server</a></h5>
+                <div class="d-flex flex-column mt-2">
+                    <a href="/dashboard" class="guide-icon"><i class="fa fa-home"></i> Home</a>
+                    <a href="/history" class="active"><i class="fa fa-history"></i> History</a>
+                    <a href="/guide" class="guide-icon"><i class="fa fa-circle-info"></i> Panduan</a>
+                    <a href="/" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container d-flex flex-column align-items-center justify-content-center w-100" style="margin-top: 10px;">
-        <input type="date" name="date" id="date" class="form-control" style="width: 500px;" />
-        <div class="w-full mt-2" style="height: 80vh; overflow-y: auto; ">
-            <div id="dataContainer" class="card border-0 shadow rounded p-2 align-items-center" style="width: 600px;">
+        <div class="bg-white h-100 w-100">
+            <div class="breadcrumb">
+                <h2>History</h2>
             </div>
-            <script>
-                const container = document.getElementById("dataContainer");
-                let date = "";
-                container.innerHTML = '';
-                let datas = [];
-                const datess = document.getElementById("date").addEventListener('input', function() {
-                    date = this.value;
-                });
-                database.on('value', (snapshot) => {
-                    const data = snapshot.val();
-                    datas = Object.entries(data).map(([key, value]) => ({
-                        date: key,
-                        ...value
-                    }))
-                    datas.filter(val => val?.date?.substring(0,9) === "2024-1-12").forEach(value => {
-                        console.log(value?.date?.substring(0,9) === "2024-1-12");
-                        const listItem = document.createElement('div');
-                        listItem.classList.add = "w-100"
-                        listItem.innerHTML = `
-                            <div class="d-flex flex-row boxx" style="margin-left:-30px;">
-                                <img src="https://static.vecteezy.com/system/resources/thumbnails/022/418/264/small/3d-isometric-web-hosting-server-transparent-background-free-png.png" alt="server-img" />
-                                <div>
-                                    <p>${value?.date}</p>
-                                    <p style="color:#A643DF;">Suhu : <strong class="text-dark">${value?.result?.split("|")[0]}</strong></p>
-                                    <p style="color:#A643DF;">Kelembaban <strong class="text-dark">${value?.result?.split("|")[1]}</strong></p>
-                                    <p style="color:#A643DF;">Status Api <strong class="text-dark">${value?.result?.split("|")[2] == 0 ? "Ada Api" : "Tidak Ada Api"}</strong> </p>
-                                    <p style="color:#A643DF;">Status Asap <strong class="text-dark">${value?.result?.split("|")[3] > 120 ? "Ada Asap" : "Tidak Ada Asap"}</strong> </p>
-                                    <hr style="width:100%;" />
-                                </div>
-                            </div>
+            <div style="padding: 10px 100px 10px 100px;">
+                <input type="date" name="date" id="date" class="form-control w-auto" />
+                <table class="table stripped responsive mt-4">
+                    <thead>
+                        <tr>
+                            <th>Tanggal</th>
+                            <th>Suhu</th>
+                            <th>Kelembaban</th>
+                            <th>Status Api</th>
+                            <th>Status Asap</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataContainer">
+
+                    </tbody>
+                </table>
+                <script>
+                    const container = document.getElementById("dataContainer");
+                    let date = "";
+                    container.innerHTML = '';
+                    let datas = [];
+                    const datess = document.getElementById("date").addEventListener('input', function() {
+                        date = this.value;
+                    });
+                    database.on('value', (snapshot) => {
+                        const data = snapshot.val();
+                        datas = Object.entries(data).map(([key, value]) => ({
+                            date: key,
+                            ...value
+                        }))
+                        datas.filter(val => val?.date?.substring(0, 9) === "2024-1-12").forEach(value => {
+                            console.log(value?.date?.substring(0, 9) === "2024-1-12");
+                            const listItem = document.createElement('tr');
+                            listItem.innerHTML = `
+                            <td>${value?.date}</td>
+                            <td>${value?.result?.split("|")[0]} °C</td>
+                            <td>${value?.result?.split("|")[1]}</td>
+                            <td>${value?.result?.split("|")[2] == 0 ? "Ada Api" : "Tidak Ada Api"}</td>
+                            <td>${value?.result?.split("|")[3] > 120 ? "Ada Asap" : "Tidak Ada Asap"}</td>
                         `
-                        container.appendChild(listItem)
+                            container.appendChild(listItem)
+                        })
                     })
-                })
-            </script>
+                </script>
+            </div>
+
         </div>
     </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
