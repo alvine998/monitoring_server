@@ -43,7 +43,14 @@
             <div class="card border-0 shadow rounded">
                 <form onsubmit="doLoginSignUp()">
                     <div class="card-body d-flex justify-content-center flex-column align-items-center">
-                        <h2>LOGIN</h2>
+                        <div class="d-flex flex-row align-items-center">
+                            <img src="https://static.vecteezy.com/system/resources/thumbnails/022/418/264/small/3d-isometric-web-hosting-server-transparent-background-free-png.png" alt="server-img" style="margin-left: -50px;" />
+                            <div>
+                                <h2>LOGIN</h2>
+                                <h2>Monitoring</h2>
+                                <h2>Server</h2>
+                            </div>
+                        </div>
                         <div class="mb-3 w-75 mt-4">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" class="form-control" id="email" placeholder="name@example.com">
