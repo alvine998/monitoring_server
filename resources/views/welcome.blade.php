@@ -21,18 +21,6 @@
         };
 
         firebase.initializeApp(firebaseConfig);
-
-        function doLoginSignUp(strg_mode) {
-            if ($('#login_button').text()) {
-                firebase.auth().signInWithEmailAndPassword($('#email').val(), $('#password').val()).then(function(result) {
-                    console.log('result: ', result);
-                    alert("Berhasil Login");
-                    window.location.href = "{{route('dashboard.index')}}"
-                }).catch(function(err) {
-                    alert(err.message);
-                })
-            }
-        }
     </script>
 </head>
 
@@ -62,6 +50,18 @@
                         <button type="submit" id="login_button" class="btn btn-md btn-success w-75 mb-3">Masuk</button>
                     </div>
                 </form>
+                <script>
+                    function doLoginSignUp() {
+                        if ($('#login_button').text()) {
+                            firebase.auth().signInWithEmailAndPassword($('#email').val(), $('#password').val()).then(function(result) {
+                                alert("Berhasil Login");
+                                window.location.href = "{{route('dashboard.index')}}"
+                            }).catch(function(err) {
+                                alert("Email atau Password anda salah");
+                            })
+                        }
+                    }
+                </script>
             </div>
         </div>
     </div>
