@@ -29,27 +29,25 @@
     <div class="container align-items-center d-flex justify-content-center" style="height: 100vh;">
         <div class="w-50">
             <div class="card border-0 shadow rounded">
-                <form onsubmit="doLoginSignUp()">
-                    <div class="card-body d-flex justify-content-center flex-column align-items-center">
-                        <div class="d-flex flex-row align-items-center">
-                            <img src="https://static.vecteezy.com/system/resources/thumbnails/022/418/264/small/3d-isometric-web-hosting-server-transparent-background-free-png.png" alt="server-img" style="margin-left: -50px;" />
-                            <div>
-                                <h2>LOGIN</h2>
-                                <h2>Monitoring</h2>
-                                <h2>Server</h2>
-                            </div>
+                <div class="card-body d-flex justify-content-center flex-column align-items-center">
+                    <div class="d-flex flex-row align-items-center">
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/022/418/264/small/3d-isometric-web-hosting-server-transparent-background-free-png.png" alt="server-img" style="margin-left: -50px;" />
+                        <div>
+                            <h2>LOGIN</h2>
+                            <h2>Monitoring</h2>
+                            <h2>Server</h2>
                         </div>
-                        <div class="mb-3 w-75 mt-4">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="name@example.com">
-                        </div>
-                        <div class="mb-3 w-75">
-                            <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="********">
-                        </div>
-                        <button type="submit" id="login_button" class="btn btn-md btn-success w-75 mb-3">Masuk</button>
                     </div>
-                </form>
+                    <div class="mb-3 w-75 mt-4">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" placeholder="name@example.com">
+                    </div>
+                    <div class="mb-3 w-75">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="********">
+                    </div>
+                    <button type="button" onclick="doLoginSignUp()" id="login_button" class="btn btn-md btn-success w-75 mb-3">Masuk</button>
+                </div>
                 <script>
                     function doLoginSignUp() {
                         if ($('#login_button').text()) {

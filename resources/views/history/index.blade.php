@@ -103,48 +103,87 @@
                 <h2>History</h2>
             </div>
             <div style="padding: 10px 100px 10px 100px;">
-                <input type="date" name="date" id="date" class="form-control w-auto" />
-                <table class="table stripped responsive mt-4">
-                    <thead>
-                        <tr>
-                            <th>Tanggal</th>
-                            <th>Suhu</th>
-                            <th>Kelembaban</th>
-                            <th>Status Api</th>
-                            <th>Status Asap</th>
-                        </tr>
-                    </thead>
-                    <tbody id="dataContainer">
+                <input type="date" name="date" id="date" class="form-control w-auto" onchange="handleDate(this)" />
+                <div style="height: 500px; overflow-y: auto;">
+                    <table class="table stripped responsive mt-4">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Suhu</th>
+                                <th>Kelembaban</th>
+                                <th>Status Api</th>
+                                <th>Status Asap</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataContainer">
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
                 <script>
                     const container = document.getElementById("dataContainer");
-                    let date = "";
                     container.innerHTML = '';
                     let datas = [];
-                    const datess = document.getElementById("date").addEventListener('input', function() {
-                        date = this.value;
-                    });
-                    database.on('value', (snapshot) => {
-                        const data = snapshot.val();
-                        datas = Object.entries(data).map(([key, value]) => ({
-                            date: key,
-                            ...value
-                        }))
-                        datas.filter(val => val?.date?.substring(0, 9) === "2024-1-12").forEach(value => {
-                            console.log(value?.date?.substring(0, 9) === "2024-1-12");
-                            const listItem = document.createElement('tr');
-                            listItem.innerHTML = `
+                    let date = "";
+
+                    function handleDate() {
+                        container.innerHTML = '';
+                        date = $('#date').val();
+                        database.on('value', (snapshot) => {
+                            const data = snapshot.val();
+                            datas = Object.entries(data).map(([key, value]) => ({
+                                date: key,
+                                ...value
+                            }))
+                            if (date !== "") {
+                                datas.filter(val => moment(val?.date).format("YYYY-MM-DD") == moment(date).format("YYYY-MM-DD"))?.forEach(value => {
+                                    const listItem = document.createElement('tr');
+                                    listItem.innerHTML = `
                             <td>${value?.date}</td>
                             <td>${value?.result?.split("|")[0]} °C</td>
                             <td>${value?.result?.split("|")[1]}</td>
                             <td>${value?.result?.split("|")[2] == 0 ? "Ada Api" : "Tidak Ada Api"}</td>
                             <td>${value?.result?.split("|")[3] > 120 ? "Ada Asap" : "Tidak Ada Asap"}</td>
                         `
-                            container.appendChild(listItem)
+                                    container.appendChild(listItem)
+                                })
+                            } else {
+                                datas?.forEach(value => {
+                                    const listItem = document.createElement('tr');
+                                    listItem.innerHTML = `
+                            <td>${value?.date}</td>
+                            <td>${value?.result?.split("|")[0]} °C</td>
+                            <td>${value?.result?.split("|")[1]}</td>
+                            <td>${value?.result?.split("|")[2] == 0 ? "Ada Api" : "Tidak Ada Api"}</td>
+                            <td>${value?.result?.split("|")[3] > 120 ? "Ada Asap" : "Tidak Ada Asap"}</td>
+                        `
+                                    container.appendChild(listItem)
+                                })
+                            }
                         })
-                    })
+                    }
+
+                    if (date == "") {
+                        database.on('value', (snapshot) => {
+                            const data = snapshot.val();
+                            datas = Object.entries(data).map(([key, value]) => ({
+                                date: key,
+                                ...value
+                            }))
+
+                            datas.forEach(value => {
+                                const listItem = document.createElement('tr');
+                                listItem.innerHTML = `
+                            <td>${value?.date}</td>
+                            <td>${value?.result?.split("|")[0]} °C</td>
+                            <td>${value?.result?.split("|")[1]}</td>
+                            <td>${value?.result?.split("|")[2] == 0 ? "Ada Api" : "Tidak Ada Api"}</td>
+                            <td>${value?.result?.split("|")[3] > 120 ? "Ada Asap" : "Tidak Ada Asap"}</td>
+                        `
+                                container.appendChild(listItem)
+                            })
+                        })
+                    }
                 </script>
             </div>
 
@@ -155,7 +194,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
+    <script src="https://momentjs.com/downloads/moment.js"></script>
 </body>
 
 </html>
