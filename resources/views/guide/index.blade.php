@@ -92,7 +92,7 @@
                 <h5><a href="" class="text-white mx-auto pl-4 brand">Monitoring Server</a></h5>
                 <div class="d-flex flex-column mt-2">
                     <a href="/dashboard" class="guide-icon"><i class="fa fa-home"></i> Home</a>
-                    <a href="/history" class="guide-icon"><i class="fa fa-history"></i> History</a>
+                    <a href="/history?status=0" class="guide-icon"><i class="fa fa-history"></i> History</a>
                     <a href="/guide" class="active"><i class="fa fa-circle-info"></i> Panduan</a>
                     <a href="/" class="logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
                 </div>
