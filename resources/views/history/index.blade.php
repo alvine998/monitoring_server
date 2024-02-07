@@ -153,6 +153,9 @@
 
                     if (paramValue == 0) {
                         tabs.classList.add('active')
+                        document.getElementById('filter').classList.add('d-none')
+                        document.getElementById('date').classList.remove('w-full')
+                        document.getElementById('date').classList.add('w-auto')
                     } else {
                         tabs2.classList.add('active')
                     }
