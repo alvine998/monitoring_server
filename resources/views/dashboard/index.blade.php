@@ -101,7 +101,7 @@
             <div class="breadcrumb">
                 <h2>Home</h2>
             </div>
-            <div class="" style="padding: 50px 400px 50px 400px;">
+            <div class="" style="padding: 50px 100px 50px 100px;">
                 <div>
                     <button class="btn btn-secondary" type="button" id="toggleButton">
                         Offline
@@ -139,21 +139,21 @@
                     </script>
                 </div>
                 <div class="w-full d-flex mt-4">
-                    <div class="card border-0 shadow rounded p-2 align-items-center" style="width: 200px;">
+                    <div class="card border-0 shadow rounded p-2 align-items-center" style="width: 500px;">
                         <h2 style="color: #A643DF;">Suhu</h2>
                         <h2 id="suhu" style="color: #A643DF;">-</h2>
                     </div>
-                    <div class="card border-0 ml-2 shadow rounded p-2 align-items-center" style="width: 200px;">
+                    <div class="card border-0 ml-2 shadow rounded p-2 align-items-center" style="width: 500px;">
                         <h2 style="color: #A643DF;">Kelembaban</h2>
                         <h2 id="kelembaban" style="color: #A643DF;">-</h2>
                     </div>
                 </div>
                 <div class="w-full d-flex mt-2">
-                    <div class="card border-0 shadow rounded p-2 align-items-center" style="width: 200px;">
+                    <div class="card border-0 shadow rounded p-2 align-items-center" style="width: 500px;">
                         <h2 style="color: #A643DF;">Api</h2>
                         <h4 id="status_api" style="color: #A643DF; text-align: center;">-</h4>
                     </div>
-                    <div class="card border-0 ml-2 shadow rounded p-2 align-items-center" style="width: 200px;">
+                    <div class="card border-0 ml-2 shadow rounded p-2 align-items-center" style="width: 500px;">
                         <h2 style="color: #A643DF;">Asap</h2>
                         <h4 id="status_asap" style="color: #A643DF; text-align: center">-</h4>
                     </div>
